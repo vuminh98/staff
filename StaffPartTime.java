@@ -1,6 +1,6 @@
 package ExStaff;
 
-public class StaffPartTime extends Staff{
+public class StaffPartTime extends Staff implements Comparable<Staff>{
     private int workingHours;
 
     public StaffPartTime() {
@@ -23,10 +23,16 @@ public class StaffPartTime extends Staff{
         this.workingHours = workingHours;
     }
 
+    public int getRealSalary() {
+        return workingHours * 100000;
+    }
+
     @Override
     public String toString() {
-        return "StaffPartTime{" +
-                "workingHours=" + workingHours +
-                '}';
+        return super.toString() + ", Salary: " + getRealSalary();
+    }
+    @Override
+    public int compareTo(Staff staff) {
+        return Integer.compare(getRealSalary(), staff.getRealSalary());
     }
 }

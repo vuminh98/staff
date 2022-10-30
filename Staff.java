@@ -1,6 +1,6 @@
 package ExStaff;
 
-public class Staff {
+public abstract class Staff implements Comparable<Staff> {
     private String code;
     private String name;
     private int age;
@@ -58,10 +58,15 @@ public class Staff {
         this.email = email;
     }
 
+    public abstract int getRealSalary();
     @Override
     public String toString() {
-        return "Staff has code: "
-                + code;
-
+        return "Staff: " +
+                "Code: " + code + ", " +
+                "Name: " + name + ", " +
+                "Age: " + age + ", " +
+                "Tel: " + tel + ", " +
+                "Email: " + email;
     }
+
 }

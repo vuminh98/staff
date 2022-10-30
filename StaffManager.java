@@ -62,7 +62,7 @@ public class StaffManager {
                     for (int i = 0; i < staffs.size() - 5; i++) {
                         if (((StaffFullTime) staffs.get(i)).getSalaryFT() + (((StaffFullTime) staffs.get(i)).getBonusMoney() - ((StaffFullTime) staffs.get(i)).getFineMoney()) > salaryAvg) {
                             staffs.remove(staffs.get(i));
-                            System.out.println(staffs.get(i).getName());
+                            System.out.println(staffs.get(i).getName() + staffs.get(i).getRealSalary());
                         }
                     }
                 }
@@ -80,13 +80,18 @@ public class StaffManager {
         System.out.println("ALl of salary for StaffPT: " + sum);
     }
 
-    public void sortSalaryOfStaffFullTime() {
-        Collections.sort(staffs, new StaffFullTime() {
-            public int compare(StaffFullTime o1 , StaffFullTime o2) {
-                return o1.getSalaryFT() - o2.getSalaryFT();
-            }
-        });
-        displayListStaff();
+    public  void sortSalaryOfStaffFullTime() {
+Collections.sort(staffs, new Comparator<Staff>() {
+    @Override
+    public int compare(Staff o1, Staff o2) {
+        return o1.getRealSalary() - o2.getRealSalary();
+    }
+});
+for (Staff staff: staffs) {
+    if (staff instanceof StaffFullTime) {
+        System.out.println(staff);
+    }
+}
     }
 }
 
