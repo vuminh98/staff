@@ -29,12 +29,11 @@ public class StaffManager {
         int salary = 0;
         for (Staff staff : staffs) {
             if (staff instanceof StaffFullTime) {
-                salary = ((StaffFullTime) staff).getSalaryFT() + (((StaffFullTime) staff).getBonusMoney() - ((StaffFullTime) staff).getFineMoney());
+                salary =  staff.getRealSalary();
             } else if (staff instanceof StaffPartTime) {
-                salary = ((StaffPartTime) staff).getWorkingHours() * 100000;
+                salary = staff.getRealSalary();
             }
-            System.out.println(staff);
-            System.out.println("Salary for Staff: " + salary + "\n");
+            System.out.println("Salary for staff has code: " + staff.getCode() + " has salary: " + salary + "\n");
         }
     }
 
@@ -49,9 +48,9 @@ public class StaffManager {
                 int salaryAvg;
                 for (Staff staff : staffs) {
                     if (staff instanceof StaffFullTime) {
-                        salaryFT += ((StaffFullTime) staff).getSalaryFT() + (((StaffFullTime) staff).getBonusMoney() - ((StaffFullTime) staff).getFineMoney());
+                        salaryFT += staff.getRealSalary();
                     } else if (staff instanceof StaffPartTime) {
-                        salaryPT += ((StaffPartTime) staff).getWorkingHours() * 100000;
+                        salaryPT += staff.getRealSalary();
                     }
                 }
                 if (choice == 1) {
@@ -60,13 +59,13 @@ public class StaffManager {
                 } else {
                     salaryAvg = (salaryFT + salaryPT) / staffs.size();
                     for (int i = 0; i < staffs.size() - 5; i++) {
-                        if (((StaffFullTime) staffs.get(i)).getSalaryFT() + (((StaffFullTime) staffs.get(i)).getBonusMoney() - ((StaffFullTime) staffs.get(i)).getFineMoney()) > salaryAvg) {
-                            staffs.remove(staffs.get(i));
-                            System.out.println(staffs.get(i).getName() + staffs.get(i).getRealSalary());
+                        if (((StaffFullTime) staffs.get(i)).getSalaryFT() + (((StaffFullTime) staffs.get(i)).getBonusMoney() - ((StaffFullTime) staffs.get(i)).getFineMoney()) < salaryAvg) {
+                            System.out.println(staffs.get(i) + " compare with salaryAvg: " + salaryAvg);
                         }
                     }
                 }
             }
+
         } catch (InputMismatchException e) {
             System.err.println("Your information is not exactly! Please choose again!");
         }
@@ -80,18 +79,18 @@ public class StaffManager {
         System.out.println("ALl of salary for StaffPT: " + sum);
     }
 
-    public  void sortSalaryOfStaffFullTime() {
-Collections.sort(staffs, new Comparator<Staff>() {
-    @Override
-    public int compare(Staff o1, Staff o2) {
-        return o1.getRealSalary() - o2.getRealSalary();
-    }
-});
-for (Staff staff: staffs) {
-    if (staff instanceof StaffFullTime) {
-        System.out.println(staff);
-    }
-}
+    public void sortSalaryOfStaffFullTime() {
+        Collections.sort(staffs, new Comparator<Staff>() {
+            @Override
+            public int compare(Staff o1, Staff o2) {
+                return o1.getRealSalary() - o2.getRealSalary();
+            }
+        });
+        for (Staff staff : staffs) {
+            if (staff instanceof StaffFullTime) {
+                System.out.println(staff);
+            }
+        }
     }
 }
 

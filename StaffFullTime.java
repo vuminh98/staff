@@ -1,6 +1,5 @@
 package ExStaff;
 
-import java.util.Comparator;
 
 public  class StaffFullTime extends Staff {
     private int BonusMoney;
@@ -53,7 +52,7 @@ public  class StaffFullTime extends Staff {
 
     @Override
     public String toString() {
-        return super.toString() + ", Salary: " + getRealSalary();
+        return super.toString() + " has salary: " + getRealSalary();
     }
 public int compareTo(Staff staff) {
         if (getRealSalary() < staff.getRealSalary()) return -1;

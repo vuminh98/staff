@@ -29,7 +29,7 @@ public class StaffPartTime extends Staff implements Comparable<Staff>{
 
     @Override
     public String toString() {
-        return super.toString() + ", Salary: " + getRealSalary();
+        return super.toString();
     }
     @Override
     public int compareTo(Staff staff) {
